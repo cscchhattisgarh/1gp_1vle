@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GP VLE Identification Form</title>
+  <!-- Bootstrap 5 & FontAwesome Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #667eea;
+      --primary-dark: #5568d3;
+      --accent-color: #10b981;
+      --accent-light: #d1fae5;
+      --dark-bg: #0f172a;
+      --dark-card: #1e293b;
+      --dark-border: #334155;
+      --dark-text: #e2e8f0;
+      --dark-text-muted: #94a3b8;
+      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #16213e 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px 15px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      color: var(--dark-text);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+      animation: moveBackground 30s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: slideDownFade 0.8s ease-out;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .page-header p {
+      color: var(--dark-text-muted);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .form-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #1e293b 0%, #1a2332 100%);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      backdrop-filter: blur(20px);
+      animation: slideUpFade 0.8s ease-out 0.2s backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #10b981 100%);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid var(--dark-border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-header h3 {
+      color: var(--dark-text);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .form-header .icon-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 18px;
+      margin-bottom: 20px;
+      animation: bounceIcon 2s infinite;
+      box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .form-header .icon-header i {
+      color: white;
+      font-size: 32px;
+    }
+
+    @keyframes bounceIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .step-wizard {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+      padding: 25px 0;
+      z-index: 1;
+    }
+
+    .step-wizard::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.3) 0%, rgba(102, 126, 234, 0.1) 50%, rgba(102, 126, 234, 0.3) 100%);
+      z-index: 1;
+    }
+
+    .step-wizard-step {
+      position: relative;
+      z-index: 2;
+      background: var(--dark-card);
+      padding: 0 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--dark-text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .step-wizard-step.active {
+      color: #667eea;
+      transform: translateY(-8px);
+    }
+
+    .step-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(102, 126, 234, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      border: 2px solid var(--dark-border);
+      transition: all 0.3s ease;
+    }
+
+    .step-wizard-step.active .step-icon {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .form-step {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-label {
+      font-weight: 700;
+      color: var(--dark-text);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-label::after {
+      content: '*';
+      color: #f87171;
+    }
+
+    .form-control, .form-select {
+      border-radius: 12px;
+      padding: 13px 16px;
+      border: 2px solid var(--dark-border);
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background-color: rgba(15, 23, 42, 0.5);
+      color: var(--dark-text);
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #667eea;
+      background-color: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+      outline: none;
+      color: var(--dark-text);
+    }
+
+    .invalid-feedback {
+      color: #fca5a5;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .mb-3 { margin-bottom: 22px; }
+
+    .btn-custom {
+      padding: 13px 32px;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .btn-primary.btn-custom {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success.btn-custom {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-outline-secondary.btn-custom {
+      border: 2px solid var(--dark-border);
+      color: var(--dark-text);
+      background: transparent;
+    }
+
+    #shgSection {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(13, 110, 253, 0.1) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    #shgSection h6 {
+      color: #86efac;
+      font-weight: 900;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+    }
+
+    .alert {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .alert-danger {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+      color: #fca5a5;
+      border-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .modal-content {
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1e293b 0%, #1a2332 100%);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .modal-icon-success { color: #10b981; font-size: 80px; }
+    .modal-icon-warning { color: #f59e0b; font-size: 80px; }
+
+    /* GPS Badge Indicator */
+    .gps-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    .gps-status-fetching { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .gps-status-success { background: rgba(16, 185, 129, 0.15); color: #86efac; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .gps-status-failed { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    @media (max-width: 768px) {
+      .form-card { padding: 30px; }
+      .d-flex { flex-direction: column; }
+      .btn-custom { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="page-header">
+    <h1>GP VLE Identification</h1>
+    <p>Empower Your Rural Business - Complete Your Registration Today</p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-header">
+      <div class="icon-header">
+        <i class="fa-solid fa-id-card"></i>
+      </div>
+      <h3>VLE Nomination Form</h3>
+      <p>स्थानीय निवासी का विवरण दर्ज करें।</p>
+      <div id="gpsBadge" class="gps-status-badge gps-status-fetching">
+        <i class="fa-solid fa-spinner fa-spin"></i> Detecting Location...
+      </div>
+    </div>
+
+    <div id="formWrapper">
+      <div class="step-wizard">
+        <div class="step-wizard-step active" id="wizardStep1">
+          <div class="step-icon">1</div>
+          <span>Location Info</span>
+        </div>
+        <div class="step-wizard-step" id="wizardStep2">
+          <div class="step-icon">2</div>
+          <span>Personal Info</span>
+        </div>
+      </div>
+
+      <div id="alertBox"></div>
+
+      <form id="vleForm" novalidate>
+        <!-- STEP 1: LOCATION MAPPING -->
+        <div class="form-step active" id="step1">
+          <div class="mb-3">
+            <label class="form-label">District</label>
+            <select id="district" class="form-select" onchange="onDistrictChange()" required>
+              <option value="">Loading Available Districts...</option>
+            </select>
+            <div class="invalid-feedback">Please select a District.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Block</label>
+            <select id="block" class="form-select" onchange="onBlockChange()" required disabled>
+              <option value="">Select District First</option>
+            </select>
+            <div class="invalid-feedback">Please select a Block.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Gram Panchayat</label>
+            <select id="gp" class="form-select" onchange="onGPChange()" required disabled>
+              <option value="">Select Block First</option>
+            </select>
+            <div class="invalid-feedback">Please select a Gram Panchayat.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Village</label>
+            <select id="village" class="form-select" required disabled>
+              <option value="">Select GP First</option>
+            </select>
+            <div class="invalid-feedback">Please select a Village.</div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-4">
+            <button type="button" class="btn btn-primary btn-custom" onclick="goToStep2()">
+              Next Step <i class="fa-solid fa-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: PERSONAL DETAILS -->
+        <div class="form-step" id="step2">
+          <div class="mb-3">
+            <label class="form-label">Full Name (As per Aadhaar)</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter full name" required>
+            <div class="invalid-feedback">Please enter your full name as per Aadhaar.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email ID (Linked with Aadhaar)</label>
+            <input type="email" id="email" class="form-control" placeholder="example@email.com" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number (Linked with Aadhaar)</label>
+            <input type="tel" id="mobile" class="form-control" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required>
+            <div class="invalid-feedback">Please enter a valid 10-digit mobile number.</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Computer Availability</label>
+              <select id="computer" class="form-select" required>
+                <option value="">Select Option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              <div class="invalid-feedback">Please select computer availability.</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Gender</label>
+              <select id="gender" class="form-select" onchange="toggleSHGSection()" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="invalid-feedback">Please select your gender.</div>
+            </div>
+          </div>
+
+          <!-- Conditional SHG Fields -->
+          <div id="shgSection" style="display: none;">
+            <h6><i class="fa-solid fa-users me-2"></i>SHG Member Details</h6>
+            
+            <div class="mb-3">
+              <label class="form-label">Are you an SHG Member?</label>
+              <select id="shgMember" class="form-select" onchange="toggleSHGFields()">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+
+            <div id="shgFields" style="display: none;">
+              <div class="mb-3">
+                <label class="form-label">SHG Group Name</label>
+                <input type="text" id="shgName" class="form-control" placeholder="Enter group name">
+                <div class="invalid-feedback">Please enter SHG Group Name.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">SHG Group Code (11 Digits)</label>
+                <input type="text" id="shgCode" class="form-control" maxlength="11" pattern="[0-9]{11}" placeholder="11-digit SHG code">
+                <div class="invalid-feedback">Please enter a valid 11-digit SHG Group Code.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-outline-secondary btn-custom" onclick="goToStep1()">
+              <i class="fa-solid fa-arrow-left me-2"></i> Previous
+            </button>
+            <button type="submit" id="submitBtn" class="btn btn-success btn-custom">
+              <i class="fa-solid fa-paper-plane me-2"></i> Submit Application
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP MODAL (SUCCESS & DUPLICATE MESSAGE) -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4 text-center">
+      <div class="modal-body">
+        <div id="modalIconContainer" class="mb-3"></div>
+        <h3 id="modalTitle" class="fw-bold mb-3"></h3>
+        <p id="modalMessage" class="fs-5 mb-4 text-light"></p>
+        <button type="button" class="btn btn-success btn-custom px-5" data-bs-dismiss="modal" onclick="resetFormToStart()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfWyXMh4F18bQwP2qCvmh6VjZUfEiNuzewkQ3Ut0IY1jVn1VNdSxa2nXs8NV23as1wkQ/exec";
+  let masterTree = {};
+  
+  // Variables for captured Coordinates
+  let userLat = "";
+  let userLong = "";
+
+  window.onload = function() {
+    loadDropdownData();
+    captureLocation(); // Auto Capture GPS Location on Load
+  };
+
+  // GPS Location Capture Function
+  function captureLocation() {
+    let gpsBadge = document.getElementById("gpsBadge");
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          userLat = position.coords.latitude;
+          userLong = position.coords.longitude;
+          
+          gpsBadge.className = "gps-status-badge gps-status-success";
+          gpsBadge.innerHTML = `<i class="fa-solid fa-location-dot me-1"></i> GPS Captured Successfully`;
+        },
+        (error) => {
+          userLat = "";
+          userLong = "";
+          gpsBadge.className = "gps-status-badge gps-status-failed";
+          gpsBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs me-1"></i> GPS Disabled / Not Allowed`;
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      gpsBadge.className = "gps-status-badge gps-status-failed";
+      gpsBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> GPS Not Supported`;
+    }
+  }
+
+  function loadDropdownData() {
+    fetch(SCRIPT_URL + "?action=getDropdownData")
+      .then(res => res.json())
+      .then(data => {
+        masterTree = data;
+        populateDistricts();
+      })
+      .catch(err => showAlert("Failed to load location data.", "danger"));
+  }
+
+  function populateDistricts() {
+    let distSelect = document.getElementById("district");
+    distSelect.innerHTML = '<option value="">Select District</option>';
+    if (Object.keys(masterTree).length === 0) {
+      distSelect.innerHTML = '<option value="">No vacant GPs available</option>';
+      return;
+    }
+    Object.keys(masterTree).forEach(dist => {
+      distSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
+    });
+  }
+
+  function onDistrictChange() {
+    let dist = document.getElementById("district").value;
+    let blockSelect = document.getElementById("block");
+    let gpSelect = document.getElementById("gp");
+    let villSelect = document.getElementById("village");
+
+    blockSelect.innerHTML = '<option value="">Select Block</option>';
+    gpSelect.innerHTML = '<option value="">Select Block First</option>';
+    villSelect.innerHTML = '<option value="">Select GP First</option>';
+
+    if (dist && masterTree[dist]) {
+      blockSelect.disabled = false;
+      Object.keys(masterTree[dist].blocks).forEach(block => {
+        blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+      });
+    } else {
+      blockSelect.disabled = true;
+      gpSelect.disabled = true;
+      villSelect.disabled = true;
+    }
+  }
+
+  function onBlockChange() {
+    let dist = document.getElementById("district").value;
+    let block = document.getElementById("block").value;
+    let gpSelect = document.getElementById("gp");
+    let villSelect = document.getElementById("village");
+
+    gpSelect.innerHTML = '<option value="">Select GP</option>';
+    villSelect.innerHTML = '<option value="">Select GP First</option>';
+
+    if (dist && block && masterTree[dist].blocks[block]) {
+      gpSelect.disabled = false;
+      Object.keys(masterTree[dist].blocks[block].gps).forEach(gp => {
+        gpSelect.innerHTML += `<option value="${gp}">${gp}</option>`;
+      });
+    } else {
+      gpSelect.disabled = true;
+      villSelect.disabled = true;
+    }
+  }
+
+  function onGPChange() {
+    let dist = document.getElementById("district").value;
+    let block = document.getElementById("block").value;
+    let gp = document.getElementById("gp").value;
+    let villSelect = document.getElementById("village");
+
+    villSelect.innerHTML = '<option value="">Select Village</option>';
+
+    if (dist && block && gp && masterTree[dist].blocks[block].gps[gp]) {
+      villSelect.disabled = false;
+      let villages = masterTree[dist].blocks[block].gps[gp].villages;
+      Object.keys(villages).forEach(vill => {
+        villSelect.innerHTML += `<option value="${vill}">${vill}</option>`;
+      });
+    } else {
+      villSelect.disabled = true;
+    }
+  }
+
+  function toggleSHGSection() {
+    let gender = document.getElementById("gender").value;
+    let shgSec = document.getElementById("shgSection");
+    if (gender === "Female") {
+      shgSec.style.display = "block";
+    } else {
+      shgSec.style.display = "none";
+      document.getElementById("shgMember").value = "No";
+      toggleSHGFields();
+    }
+  }
+
+  function toggleSHGFields() {
+    let isSHG = document.getElementById("shgMember").value;
+    let shgFields = document.getElementById("shgFields");
+    let shgName = document.getElementById("shgName");
+    let shgCode = document.getElementById("shgCode");
+
+    if (isSHG === "Yes") {
+      shgFields.style.display = "block";
+      shgName.required = true;
+      shgCode.required = true;
+    } else {
+      shgFields.style.display = "none";
+      shgName.required = false;
+      shgCode.required = false;
+      shgName.value = "";
+      shgCode.value = "";
+    }
+  }
+
+  function goToStep2() {
+    let step1Container = document.getElementById("step1");
+    let inputs = step1Container.querySelectorAll("select");
+    let isValid = true;
+
+    inputs.forEach(input => {
+      if (!input.checkValidity()) {
+        isValid = false;
+        input.classList.add("is-invalid");
+      } else {
+        input.classList.remove("is-invalid");
+      }
+    });
+
+    if (!isValid) {
+      showAlert("Please select all location details (District, Block, GP, Village) before proceeding.", "danger");
+      return;
+    }
+
+    document.getElementById("alertBox").innerHTML = "";
+    document.getElementById("step1").classList.remove("active");
+    document.getElementById("step2").classList.add("active");
+    document.getElementById("wizardStep2").classList.add("active");
+  }
+
+  function goToStep1() {
+    document.getElementById("alertBox").innerHTML = "";
+    document.getElementById("step2").classList.remove("active");
+    document.getElementById("step1").classList.add("active");
+    document.getElementById("wizardStep2").classList.remove("active");
+  }
+
+  function resetFormToStart() {
+    document.getElementById("vleForm").reset();
+    document.getElementById("shgSection").style.display = "none";
+    goToStep1();
+    loadDropdownData();
+    captureLocation();
+  }
+
+  document.getElementById("vleForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    // STRICT LOCATION CHECK BEFORE SUBMISSION
+    if (!userLat || !userLong) {
+      showPopUp(
+        "Location Alert",
+        "कृपया अपने मोबाइल का GPS/Location ऑन करें, या लिंक को किसी अन्य ब्राउज़र में खोलकर 'Allow Location' पर क्लिक करें।",
+        "warning"
+      );
+      captureLocation(); // Try re-fetching location
+      return;
+    }
+
+    let step2Container = document.getElementById("step2");
+    let inputs = step2Container.querySelectorAll("input, select");
+    let isValid = true;
+
+    inputs.forEach(input => {
+      if (!input.checkValidity()) {
+        isValid = false;
+        input.classList.add("is-invalid");
+      } else {
+        input.classList.remove("is-invalid");
+      }
+    });
+
+    if (!isValid) {
+      showAlert("Please correct the errors in Step 2 personal details.", "danger");
+      return;
+    }
+
+    let submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Submitting...`;
+
+    let dist = document.getElementById("district").value;
+    let block = document.getElementById("block").value;
+    let gp = document.getElementById("gp").value;
+    let vill = document.getElementById("village").value;
+
+    let payload = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      mobile: document.getElementById("mobile").value,
+      computer: document.getElementById("computer").value,
+      gender: document.getElementById("gender").value,
+      shgMember: document.getElementById("shgMember").value,
+      shgName: document.getElementById("shgName").value,
+      shgCode: document.getElementById("shgCode").value,
+      
+      districtName: dist,
+      districtCode: masterTree[dist].code,
+      blockName: block,
+      blockCode: masterTree[dist].blocks[block].code,
+      gpName: gp,
+      gpCode: masterTree[dist].blocks[block].gps[gp].code,
+      villageName: vill,
+      villageCode: masterTree[dist].blocks[block].gps[gp].villages[vill],
+
+      // Captured GPS Data
+      latitude: userLat,
+      longitude: userLong
+    };
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(res => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane me-2"></i> Submit Application`;
+      
+      if (res.status === "DUPLICATE") {
+        showPopUp("सूचना", res.message, "warning");
+      } else if (res.status === "LIMIT_EXCEEDED") {
+        showAlert(res.message, "danger");
+      } else if (res.status === "SUCCESS") {
+        showPopUp("सफलता!", "आपका आवेदन सफलतापूर्वक जमा कर दिया गया है।", "success");
+      } else {
+        showAlert("Error: " + res.message, "danger");
+      }
+    })
+    .catch(err => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane me-2"></i> Submit Application`;
+      showAlert("An error occurred during submission. Please try again.", "danger");
+    });
+  };
+
+  function showPopUp(title, message, type) {
+    document.getElementById("alertBox").innerHTML = "";
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalMessage").innerText = message;
+    
+    let iconContainer = document.getElementById("modalIconContainer");
+    if (type === "warning") {
+      iconContainer.innerHTML = `<i class="fa-solid fa-triangle-exclamation modal-icon-warning"></i>`;
+      document.getElementById("modalTitle").style.color = "#f59e0b";
+    } else {
+      iconContainer.innerHTML = `<i class="fa-solid fa-circle-check modal-icon-success"></i>`;
+      document.getElementById("modalTitle").style.color = "#86efac";
+    }
+
+    let modal = new bootstrap.Modal(document.getElementById('infoModal'));
+    modal.show();
+  }
+
+  function showAlert(msg, type) {
+    document.getElementById("alertBox").innerHTML = `
+      <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-${type === 'danger' ? 'circle-exclamation' : 'circle-check'} me-2"></i>
+        ${msg}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
