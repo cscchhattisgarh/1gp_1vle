@@ -16,28 +16,27 @@
     }
 
     :root {
-      --primary-color: #667eea;
-      --primary-dark: #5568d3;
-      --accent-color: #10b981;
-      --accent-light: #d1fae5;
-      --dark-bg: #0f172a;
-      --dark-card: #1e293b;
-      --dark-border: #334155;
-      --dark-text: #e2e8f0;
-      --dark-text-muted: #94a3b8;
-      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent-color: #059669;
+      --light-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
     }
     
     body {
-      background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #16213e 100%);
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #f8fafc 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 40px 15px;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      color: var(--dark-text);
+      color: var(--text-main);
     }
 
     body::before {
@@ -48,8 +47,8 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.04) 0%, transparent 50%);
       animation: moveBackground 30s linear infinite;
       z-index: 0;
       pointer-events: none;
@@ -57,7 +56,7 @@
 
     @keyframes moveBackground {
       0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
+      100% { transform: translate(40px, 40px); }
     }
 
     .container {
@@ -67,38 +66,36 @@
 
     .page-header {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       animation: slideDownFade 0.8s ease-out;
     }
 
     .page-header h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #10b981 100%);
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #059669 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 0 30px rgba(102, 126, 234, 0.2);
     }
 
     .page-header p {
-      color: var(--dark-text-muted);
+      color: var(--text-muted);
       font-size: 1.1rem;
       font-weight: 500;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
 
     .form-card {
       max-width: 800px;
       margin: 0 auto;
-      background: linear-gradient(135deg, #1e293b 0%, #1a2332 100%);
-      padding: 50px;
+      background: var(--card-bg);
+      padding: 45px 50px;
       border-radius: 20px;
       box-shadow: var(--shadow-lg);
-      border: 1px solid rgba(102, 126, 234, 0.2);
-      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
       animation: slideUpFade 0.8s ease-out 0.2s backwards;
       position: relative;
       overflow: hidden;
@@ -110,113 +107,115 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #10b981 100%);
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #10b981 100%);
     }
 
     .form-header {
       text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 30px;
-      border-bottom: 2px solid var(--dark-border);
+      margin-bottom: 35px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--border-color);
       position: relative;
       z-index: 1;
     }
 
     .form-header h3 {
-      color: var(--dark-text);
+      color: var(--text-main);
       font-weight: 800;
       letter-spacing: -0.5px;
-      font-size: 2rem;
-      margin-bottom: 15px;
+      font-size: 1.85rem;
+      margin-bottom: 10px;
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      margin-bottom: 0;
+      font-weight: 500;
     }
 
     .form-header .icon-header {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      width: 65px;
+      height: 65px;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       border-radius: 18px;
-      margin-bottom: 20px;
-      animation: bounceIcon 2s infinite;
-      box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+      margin-bottom: 18px;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
     }
 
     .form-header .icon-header i {
       color: white;
-      font-size: 32px;
-    }
-
-    @keyframes bounceIcon {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      font-size: 28px;
     }
 
     .step-wizard {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
       position: relative;
-      padding: 25px 0;
+      padding: 15px 0;
       z-index: 1;
     }
 
     .step-wizard::before {
       content: '';
       position: absolute;
-      top: 35px;
+      top: 40px;
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, rgba(102, 126, 234, 0.3) 0%, rgba(102, 126, 234, 0.1) 50%, rgba(102, 126, 234, 0.3) 100%);
+      background: #e2e8f0;
       z-index: 1;
     }
 
     .step-wizard-step {
       position: relative;
       z-index: 2;
-      background: var(--dark-card);
+      background: var(--card-bg);
       padding: 0 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
-      color: var(--dark-text-muted);
+      color: var(--text-muted);
       transition: all 0.3s ease;
+      font-size: 0.9rem;
     }
 
     .step-wizard-step.active {
-      color: #667eea;
-      transform: translateY(-8px);
+      color: var(--primary-color);
+      transform: translateY(-4px);
     }
 
     .step-icon {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: rgba(102, 126, 234, 0.1);
+      background: #f1f5f9;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      border: 2px solid var(--dark-border);
+      border: 2px solid #cbd5e1;
+      color: #64748b;
       transition: all 0.3s ease;
     }
 
     .step-wizard-step.active .step-icon {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       color: #fff;
-      border-color: #667eea;
-      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+      border-color: #2563eb;
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
     }
 
     .form-step {
       display: none;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 0.4s ease-in-out;
       position: relative;
       z-index: 1;
     }
@@ -226,58 +225,58 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .form-label {
       font-weight: 700;
-      color: var(--dark-text);
-      font-size: 0.85rem;
-      margin-bottom: 10px;
+      color: #334155;
+      font-size: 0.82rem;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .form-label::after {
       content: '*';
-      color: #f87171;
+      color: #ef4444;
     }
 
     .form-control, .form-select {
-      border-radius: 12px;
-      padding: 13px 16px;
-      border: 2px solid var(--dark-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      border: 1.5px solid #cbd5e1;
       font-size: 0.95rem;
-      transition: all 0.3s ease;
-      background-color: rgba(15, 23, 42, 0.5);
-      color: var(--dark-text);
+      transition: all 0.25s ease;
+      background-color: #f8fafc;
+      color: var(--text-main);
     }
 
     .form-control:focus, .form-select:focus {
-      border-color: #667eea;
-      background-color: rgba(15, 23, 42, 0.8);
-      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+      border-color: var(--primary-color);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
       outline: none;
-      color: var(--dark-text);
+      color: var(--text-main);
     }
 
     .invalid-feedback {
-      color: #fca5a5;
-      font-size: 0.85rem;
-      margin-top: 6px;
+      color: #dc2626;
+      font-size: 0.82rem;
+      margin-top: 5px;
       display: block;
     }
 
     .mb-3 { margin-bottom: 22px; }
 
     .btn-custom {
-      padding: 13px 32px;
-      border-radius: 12px;
-      font-weight: 800;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-weight: 700;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
       border: none;
@@ -287,78 +286,81 @@
     }
 
     .btn-primary.btn-custom {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       color: white;
-      box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary.btn-custom:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
     }
 
     .btn-success.btn-custom {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: white;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-success.btn-custom:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
     }
 
     .btn-outline-secondary.btn-custom {
-      border: 2px solid var(--dark-border);
-      color: var(--dark-text);
-      background: transparent;
+      border: 1.5px solid #cbd5e1;
+      color: #475569;
+      background: #f8fafc;
+    }
+
+    .btn-outline-secondary.btn-custom:hover {
+      background: #e2e8f0;
+      color: #1e293b;
     }
 
     #shgSection {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(13, 110, 253, 0.1) 100%);
-      border: 2px solid rgba(16, 185, 129, 0.3);
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 25px;
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 22px;
     }
 
     #shgSection h6 {
-      color: #86efac;
-      font-weight: 900;
-      font-size: 1.05rem;
+      color: #166534;
+      font-weight: 800;
+      font-size: 0.95rem;
       text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
     .alert {
-      border-radius: 12px;
-      padding: 16px 20px;
+      border-radius: 10px;
+      padding: 14px 18px;
       margin-bottom: 20px;
       font-weight: 600;
     }
 
     .alert-danger {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-      color: #fca5a5;
-      border-color: rgba(220, 38, 38, 0.3);
+      background-color: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
     }
 
     .modal-content {
-      border-radius: 20px;
-      background: linear-gradient(135deg, #1e293b 0%, #1a2332 100%);
-      border: 1px solid rgba(102, 126, 234, 0.2);
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: var(--shadow-lg);
     }
 
-    .modal-icon-success { color: #10b981; font-size: 80px; }
-    .modal-icon-warning { color: #f59e0b; font-size: 80px; }
-
-    /* GPS Badge Indicator */
-    .gps-status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-top: 10px;
-    }
-    .gps-status-fetching { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .gps-status-success { background: rgba(16, 185, 129, 0.15); color: #86efac; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .gps-status-failed { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .modal-icon-success { color: #10b981; font-size: 70px; }
+    .modal-icon-warning { color: #f59e0b; font-size: 70px; }
+    #modalMessage { color: #475569 !important; }
 
     @media (max-width: 768px) {
-      .form-card { padding: 30px; }
-      .d-flex { flex-direction: column; }
+      .form-card { padding: 25px 20px; }
+      .d-flex { flex-direction: column; gap: 10px; }
       .btn-custom { width: 100%; }
     }
   </style>
@@ -378,9 +380,6 @@
       </div>
       <h3>VLE Nomination Form</h3>
       <p>स्थानीय निवासी का विवरण दर्ज करें।</p>
-      <div id="gpsBadge" class="gps-status-badge gps-status-fetching">
-        <i class="fa-solid fa-spinner fa-spin"></i> Detecting Location...
-      </div>
     </div>
 
     <div id="formWrapper">
@@ -523,14 +522,14 @@
   </div>
 </div>
 
-<!-- POPUP MODAL (SUCCESS & DUPLICATE MESSAGE) -->
+<!-- POPUP MODAL -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-4 text-center">
       <div class="modal-body">
         <div id="modalIconContainer" class="mb-3"></div>
         <h3 id="modalTitle" class="fw-bold mb-3"></h3>
-        <p id="modalMessage" class="fs-5 mb-4 text-light"></p>
+        <p id="modalMessage" class="fs-5 mb-4"></p>
         <button type="button" class="btn btn-success btn-custom px-5" data-bs-dismiss="modal" onclick="resetFormToStart()">OK</button>
       </div>
     </div>
@@ -542,42 +541,10 @@
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfWyXMh4F18bQwP2qCvmh6VjZUfEiNuzewkQ3Ut0IY1jVn1VNdSxa2nXs8NV23as1wkQ/exec";
   let masterTree = {};
-  
-  // Variables for captured Coordinates
-  let userLat = "";
-  let userLong = "";
 
   window.onload = function() {
     loadDropdownData();
-    captureLocation(); // Auto Capture GPS Location on Load
   };
-
-  // GPS Location Capture Function
-  function captureLocation() {
-    let gpsBadge = document.getElementById("gpsBadge");
-    
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          userLat = position.coords.latitude;
-          userLong = position.coords.longitude;
-          
-          gpsBadge.className = "gps-status-badge gps-status-success";
-          gpsBadge.innerHTML = `<i class="fa-solid fa-location-dot me-1"></i> GPS Captured Successfully`;
-        },
-        (error) => {
-          userLat = "";
-          userLong = "";
-          gpsBadge.className = "gps-status-badge gps-status-failed";
-          gpsBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs me-1"></i> GPS Disabled / Not Allowed`;
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    } else {
-      gpsBadge.className = "gps-status-badge gps-status-failed";
-      gpsBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> GPS Not Supported`;
-    }
-  }
 
   function loadDropdownData() {
     fetch(SCRIPT_URL + "?action=getDropdownData")
@@ -730,22 +697,10 @@
     document.getElementById("shgSection").style.display = "none";
     goToStep1();
     loadDropdownData();
-    captureLocation();
   }
 
   document.getElementById("vleForm").onsubmit = function(e) {
     e.preventDefault();
-
-    // STRICT LOCATION CHECK BEFORE SUBMISSION
-    if (!userLat || !userLong) {
-      showPopUp(
-        "Location Alert",
-        "कृपया अपने मोबाइल का GPS/Location ऑन करें, या लिंक को किसी अन्य ब्राउज़र में खोलकर 'Allow Location' पर क्लिक करें।",
-        "warning"
-      );
-      captureLocation(); // Try re-fetching location
-      return;
-    }
 
     let step2Container = document.getElementById("step2");
     let inputs = step2Container.querySelectorAll("input, select");
@@ -791,11 +746,7 @@
       gpName: gp,
       gpCode: masterTree[dist].blocks[block].gps[gp].code,
       villageName: vill,
-      villageCode: masterTree[dist].blocks[block].gps[gp].villages[vill],
-
-      // Captured GPS Data
-      latitude: userLat,
-      longitude: userLong
+      villageCode: masterTree[dist].blocks[block].gps[gp].villages[vill]
     };
 
     fetch(SCRIPT_URL, {
@@ -832,10 +783,10 @@
     let iconContainer = document.getElementById("modalIconContainer");
     if (type === "warning") {
       iconContainer.innerHTML = `<i class="fa-solid fa-triangle-exclamation modal-icon-warning"></i>`;
-      document.getElementById("modalTitle").style.color = "#f59e0b";
+      document.getElementById("modalTitle").style.color = "#d97706";
     } else {
       iconContainer.innerHTML = `<i class="fa-solid fa-circle-check modal-icon-success"></i>`;
-      document.getElementById("modalTitle").style.color = "#86efac";
+      document.getElementById("modalTitle").style.color = "#059669";
     }
 
     let modal = new bootstrap.Modal(document.getElementById('infoModal'));
@@ -847,7 +798,7 @@
       <div class="alert alert-${type} alert-dismissible fade show" role="alert">
         <i class="fa-solid fa-${type === 'danger' ? 'circle-exclamation' : 'circle-check'} me-2"></i>
         ${msg}
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     `;
   }
